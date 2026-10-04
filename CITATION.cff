@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this reproducible course project, please cite it and the original UCI dataset."
+title: "Feature Selection and Machine Learning for Mortality Prediction in Heart Failure"
+type: software
+authors:
+  - family-names: "Zerihun"
+    given-names: "Bisrat"
+year: 2026
+license: MIT
+repository-code: "https://github.com/bis-carbon/ZerihunDDS7255"
+preferred-citation:
+  type: generic
+  title: "Feature Selection and Machine Learning for Mortality Prediction in Heart Failure"
+  year: 2026
+  authors:
+    - family-names: "Zerihun"
+      given-names: "Bisrat"
