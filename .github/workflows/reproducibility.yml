@@ -1,0 +1,43 @@
+name: Reproducibility Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate data contract
+        run: pytest -q
+
+      - name: Reproduce CRISP-DM workflow
+        run: python scripts/run_all.py
+
+      - name: Verify committed reproducibility artifacts are current
+        run: |
+          git diff --exit-code -- \
+            data/processed \
+            outputs/metrics/01_project_charter.json \
+            outputs/metrics/02_data_profile.json \
+            outputs/metrics/04_model_summary.csv \
+            outputs/metrics/04_modeling_metadata.json \
+            outputs/metrics/05_overall_oof_metrics.json \
+            outputs/metrics/05_subgroup_metrics.csv \
+            outputs/metrics/06_example_predictions.csv \
+            outputs/figures \
+            outputs/models/MODEL_CARD.md
