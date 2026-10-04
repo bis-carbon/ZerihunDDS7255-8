@@ -72,7 +72,7 @@ Fits the two selected-feature models on the full course dataset, writes research
 ## Repository Structure
 
 ```text
-ZerihunDDS7255/
+ZerihunDDS7255-8/
 ├── data/
 │   ├── raw/
 │   │   └── heart_failure_clinical_records_dataset.csv
@@ -116,8 +116,8 @@ ZerihunDDS7255/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/bis-carbon/ZerihunDDS7255.git
-cd ZerihunDDS7255
+git clone https://github.com/bis-carbon/ZerihunDDS7255-8.git
+cd ZerihunDDS7255-8
 ```
 
 ### 2. Create and activate a virtual environment
