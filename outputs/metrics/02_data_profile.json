@@ -1,0 +1,38 @@
+{
+  "crisp_dm_phase": "Data Understanding",
+  "shape": [
+    299,
+    13
+  ],
+  "columns": [
+    "age",
+    "anaemia",
+    "creatinine_phosphokinase",
+    "diabetes",
+    "ejection_fraction",
+    "high_blood_pressure",
+    "platelets",
+    "serum_creatinine",
+    "serum_sodium",
+    "sex",
+    "smoking",
+    "time",
+    "DEATH_EVENT"
+  ],
+  "event_count": 96,
+  "event_prevalence": 0.3210702341137124,
+  "missing_values_total": 0,
+  "follow_up_days": {
+    "min": 4,
+    "max": 285,
+    "median": 115
+  },
+  "mortality_strata": {
+    "Age <65": 0.25,
+    "Age >=65": 0.43478260869565216,
+    "EF <40%": 0.4010989010989011,
+    "EF >=40%": 0.19658119658119658,
+    "Creatinine <=1.5": 0.22844827586206898,
+    "Creatinine >1.5": 0.6417910447761194
+  }
+}

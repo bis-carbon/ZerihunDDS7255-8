@@ -1,0 +1,8 @@
+{
+  "crisp_dm_phase": "Modeling",
+  "modeling_design": "Fixed configurations; no grid/random search on repeated-CV results.",
+  "cross_validation": "5-fold stratified CV repeated 20 times",
+  "random_state": 42,
+  "average_precision_definition": "scikit-learn average_precision scorer",
+  "threshold_for_class_metrics": 0.5
+}

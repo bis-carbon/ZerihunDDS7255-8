@@ -1,0 +1,26 @@
+{
+  "selected_logistic_regression": {
+    "roc_auc": 0.771244,
+    "average_precision": 0.633327,
+    "accuracy": 0.759197,
+    "balanced_accuracy": 0.682651,
+    "precision": 0.681818,
+    "recall": 0.46875,
+    "f1": 0.555556,
+    "brier": 0.171108,
+    "calibration_intercept": -0.049446,
+    "calibration_slope": 0.930538
+  },
+  "selected_random_forest": {
+    "roc_auc": 0.815066,
+    "average_precision": 0.67897,
+    "accuracy": 0.755853,
+    "balanced_accuracy": 0.704895,
+    "precision": 0.635294,
+    "recall": 0.5625,
+    "f1": 0.596685,
+    "brier": 0.157631,
+    "calibration_intercept": 0.00489,
+    "calibration_slope": 0.926942
+  }
+}

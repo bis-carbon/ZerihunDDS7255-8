@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="500" viewBox="0 0 700 500">
+<rect width="100%" height="100%" fill="white"/>
+<text x="350" y="34" text-anchor="middle" font-family="Arial" font-size="22">Out-of-Fold Calibration Summary</text>
+<line x1="90" y1="410" x2="650" y2="410" stroke="black"/>
+<line x1="90" y1="70" x2="90" y2="410" stroke="black"/>
+<line x1="538.000" y1="70" x2="538.000" y2="410" stroke="#888" stroke-dasharray="6,5"/>
+<line x1="90" y1="240.000" x2="650" y2="240.000" stroke="#888" stroke-dasharray="6,5"/>
+<text x="350" y="460" text-anchor="middle" font-family="Arial" font-size="15">Calibration slope (ideal = 1)</text>
+<text x="24" y="240" transform="rotate(-90 24 240)" text-anchor="middle" font-family="Arial" font-size="15">Calibration intercept (ideal = 0)</text>
+<circle cx="382.405" cy="324.058" r="8" fill="#555"/><text x="245" y="370" font-family="Arial" font-size="14">Selected LR: slope 0.931, intercept -0.049</text>
+<circle cx="374.350" cy="231.687" r="8" fill="#999"/><text x="230" y="185" font-family="Arial" font-size="14">Selected RF: slope 0.927, intercept 0.005</text>
+<text x="538.000" y="435" text-anchor="middle" font-family="Arial" font-size="12">Ideal slope</text>
+<text x="615" y="232.000" font-family="Arial" font-size="12">Ideal intercept</text>
+</svg>
