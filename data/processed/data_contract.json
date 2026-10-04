@@ -1,0 +1,33 @@
+{
+  "crisp_dm_phase": "Data Preparation",
+  "raw_rows": 299,
+  "target": "DEATH_EVENT",
+  "excluded_post_baseline_variable": "time",
+  "baseline_features": [
+    "age",
+    "anaemia",
+    "creatinine_phosphokinase",
+    "diabetes",
+    "ejection_fraction",
+    "high_blood_pressure",
+    "platelets",
+    "serum_creatinine",
+    "serum_sodium",
+    "sex",
+    "smoking"
+  ],
+  "selected_features": [
+    "age",
+    "ejection_fraction",
+    "serum_creatinine"
+  ],
+  "missing_values": 0,
+  "baseline_shape": [
+    299,
+    12
+  ],
+  "selected_shape": [
+    299,
+    4
+  ]
+}
