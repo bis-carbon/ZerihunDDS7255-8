@@ -1,7 +1,11 @@
+"""Define and persist the CRISP-DM business-understanding artifact."""
+
 from config import METRIC_DIR
 from utils import write_json
 
+
 def main():
+    """Create and persist the project charter for the business-understanding phase."""
     charter = {
         "project_title": "Feature Selection and Machine Learning for Mortality Prediction in Heart Failure",
         "crisp_dm_phase": "Business Understanding",
@@ -35,6 +39,7 @@ def main():
     }
     write_json(charter, METRIC_DIR / "01_project_charter.json")
     print("Business-understanding artifact written.")
+
 
 if __name__ == "__main__":
     main()

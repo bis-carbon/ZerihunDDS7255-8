@@ -1,3 +1,5 @@
+"""Shared data-loading, metric, and JSON-persistence utilities."""
+
 import json
 from pathlib import Path
 import numpy as np
@@ -13,10 +15,14 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
+
 def load_csv(path: Path) -> pd.DataFrame:
+    """Load a CSV file into a pandas DataFrame."""
     return pd.read_csv(path)
 
+
 def classification_metrics(y_true, probability, threshold=0.5):
+    """Compute discrimination, classification, and probability-quality metrics."""
     probability = np.asarray(probability)
     prediction = (probability >= threshold).astype(int)
     return {
@@ -30,7 +36,9 @@ def classification_metrics(y_true, probability, threshold=0.5):
         "brier": brier_score_loss(y_true, probability),
     }
 
+
 def write_json(obj, path: Path):
+    """Serialize an object as indented JSON with a trailing newline."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
         json.dump(obj, handle, indent=2, default=float)

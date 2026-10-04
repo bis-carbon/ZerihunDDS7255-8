@@ -1,3 +1,5 @@
+"""Inspect the raw heart-failure dataset and produce descriptive artifacts."""
+
 import json
 import pandas as pd
 
@@ -11,13 +13,17 @@ EXPECTED_COLUMNS = [
     "time", "DEATH_EVENT",
 ]
 
+
 def validate_raw_data(df):
+    """Validate the expected schema, sample size, outcome count, and missingness."""
     assert list(df.columns) == EXPECTED_COLUMNS, "Unexpected column order or names."
     assert df.shape == (299, 13), f"Unexpected shape: {df.shape}"
     assert int(df[TARGET].sum()) == 96, "Unexpected death-event count."
     assert df.isna().sum().sum() == 0, "Unexpected missing values."
 
+
 def mortality_strata(df):
+    """Return observed mortality proportions for prespecified descriptive strata."""
     return {
         "Age <65": df.loc[df["age"] < 65, TARGET].mean(),
         "Age >=65": df.loc[df["age"] >= 65, TARGET].mean(),
@@ -27,7 +33,9 @@ def mortality_strata(df):
         "Creatinine >1.5": df.loc[df["serum_creatinine"] > 1.5, TARGET].mean(),
     }
 
+
 def make_mortality_figure(groups):
+    """Write an SVG bar chart of observed mortality for the supplied strata."""
     bars = []
     for i, (label, value) in enumerate(groups.items()):
         x = 110 + i * 120
@@ -50,7 +58,9 @@ def make_mortality_figure(groups):
     )
     (FIGURE_DIR / "figure_01_mortality_strata.svg").write_text(svg, encoding="utf-8")
 
+
 def main():
+    """Run data validation, descriptive profiling, and figure generation."""
     df = pd.read_csv(RAW_DATA)
     validate_raw_data(df)
     strata = mortality_strata(df)
@@ -71,6 +81,7 @@ def main():
     }
     write_json(profile, METRIC_DIR / "02_data_profile.json")
     print(json.dumps(profile, indent=2))
+
 
 if __name__ == "__main__":
     main()

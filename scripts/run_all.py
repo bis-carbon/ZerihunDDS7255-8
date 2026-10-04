@@ -1,3 +1,5 @@
+"""Execute all CRISP-DM phase scripts in sequence."""
+
 import subprocess
 import sys
 from pathlib import Path
@@ -12,11 +14,14 @@ STEPS = [
     "06_deployment.py",
 ]
 
+
 def main():
+    """Run each CRISP-DM phase script and stop immediately if any phase fails."""
     for step in STEPS:
         print(f"\n=== Running {step} ===")
         subprocess.run([sys.executable, str(HERE / step)], check=True)
     print("\nAll CRISP-DM phases completed successfully.")
+
 
 if __name__ == "__main__":
     main()

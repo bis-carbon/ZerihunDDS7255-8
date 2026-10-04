@@ -1,3 +1,5 @@
+"""Evaluate selected models with out-of-fold calibration and subgroup metrics."""
+
 import json
 import numpy as np
 import pandas as pd
@@ -18,7 +20,9 @@ spec = spec_from_file_location("modeling_module", modeling_path)
 modeling = module_from_spec(spec)
 spec.loader.exec_module(modeling)
 
+
 def calibration_intercept_slope(y, probability):
+    """Estimate calibration intercept and slope from predicted probabilities."""
     eps = 1e-6
     p = np.clip(np.asarray(probability), eps, 1 - eps)
     logit = np.log(p / (1 - p)).reshape(-1, 1)
@@ -26,7 +30,9 @@ def calibration_intercept_slope(y, probability):
     model.fit(logit, y)
     return float(model.intercept_[0]), float(model.coef_[0][0])
 
+
 def subgroup_rows(df, y, probability):
+    """Compute descriptive performance metrics for prespecified age and sex subgroups."""
     result = []
     definitions = [
         ("Female", df["sex"] == 0),
@@ -45,11 +51,14 @@ def subgroup_rows(df, y, probability):
         })
     return pd.DataFrame(result)
 
+
 def make_calibration_summary_figure(rounded_overall):
+    """Write an SVG summary of calibration intercepts and slopes for selected models."""
     lr = rounded_overall["selected_logistic_regression"]
     rf = rounded_overall["selected_random_forest"]
 
     def point(item):
+        """Map calibration statistics to SVG coordinates."""
         slope = item["calibration_slope"]
         intercept = item["calibration_intercept"]
         x = 90 + (slope - 0.8) / 0.25 * 560
@@ -79,13 +88,17 @@ def make_calibration_summary_figure(rounded_overall):
     )
     (FIGURE_DIR / "figure_03_calibration_summary.svg").write_text(svg, encoding="utf-8")
 
+
 def round_metrics(mapping, digits=6):
+    """Round nested model-metric mappings to a fixed number of decimal places."""
     return {
         model: {key: round(float(value), digits) for key, value in metrics.items()}
         for model, metrics in mapping.items()
     }
 
+
 def main():
+    """Generate out-of-fold predictions, calibration statistics, and subgroup metrics."""
     df = pd.read_csv(RAW_DATA)
     X = df[SELECTED_FEATURES]
     y = df[TARGET]
@@ -122,6 +135,7 @@ def main():
     subgroup.round(6).to_csv(METRIC_DIR / "05_subgroup_metrics.csv", index=False)
     print(json.dumps(rounded_overall, indent=2))
     print(subgroup.to_string(index=False))
+
 
 if __name__ == "__main__":
     main()

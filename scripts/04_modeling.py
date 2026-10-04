@@ -1,3 +1,5 @@
+"""Train and compare fixed logistic-regression and random-forest configurations."""
+
 import json
 import numpy as np
 import pandas as pd
@@ -12,7 +14,9 @@ from config import (
     RANDOM_STATE, N_SPLITS, N_REPEATS, METRIC_DIR, FIGURE_DIR,
 )
 
+
 def logistic_pipeline():
+    """Return the fixed standardized logistic-regression pipeline."""
     return Pipeline([
         ("scale", StandardScaler()),
         ("model", LogisticRegression(
@@ -24,7 +28,9 @@ def logistic_pipeline():
         )),
     ])
 
+
 def random_forest():
+    """Return the fixed random-forest classifier used in the study."""
     return RandomForestClassifier(
         n_estimators=500,
         max_features="sqrt",
@@ -33,6 +39,7 @@ def random_forest():
         random_state=RANDOM_STATE,
         n_jobs=1,
     )
+
 
 SCORING = {
     "roc_auc": "roc_auc",
@@ -45,7 +52,9 @@ SCORING = {
     "neg_brier": "neg_brier_score",
 }
 
+
 def evaluate_configuration(name, estimator, X, y, cv):
+    """Evaluate one model-feature configuration across repeated cross-validation."""
     scores = cross_validate(
         estimator, X, y, cv=cv, scoring=SCORING, n_jobs=-1,
         return_train_score=False, error_score="raise"
@@ -63,7 +72,9 @@ def evaluate_configuration(name, estimator, X, y, cv):
         "brier": -scores["test_neg_brier"],
     })
 
+
 def make_discrimination_figure(summary):
+    """Write an SVG comparison of mean ROC-AUC and average precision."""
     order = [
         ("all_feature_logistic_regression", "All LR"),
         ("selected_logistic_regression", "Selected LR"),
@@ -97,7 +108,9 @@ def make_discrimination_figure(summary):
     )
     (FIGURE_DIR / "figure_02_repeated_cv.svg").write_text(svg, encoding="utf-8")
 
+
 def main():
+    """Run repeated cross-validation and persist model-comparison artifacts."""
     df = pd.read_csv(RAW_DATA)
     y = df[TARGET]
     cv = RepeatedStratifiedKFold(
@@ -141,6 +154,7 @@ def main():
         json.dumps(metadata, indent=2) + "\n", encoding="utf-8"
     )
     print(summary.to_string(index=False))
+
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,5 @@
+"""Fit final selected-feature models and write research-only deployment artifacts."""
+
 import joblib
 import pandas as pd
 from pathlib import Path
@@ -10,7 +12,9 @@ spec = spec_from_file_location("modeling_module", modeling_path)
 modeling = module_from_spec(spec)
 spec.loader.exec_module(modeling)
 
+
 def main():
+    """Fit final models, save artifacts, and write example predictions and model documentation."""
     df = pd.read_csv(RAW_DATA)
     X = df[SELECTED_FEATURES]
     y = df[TARGET]
@@ -61,6 +65,7 @@ Research/education only. Not for clinical decision-making.
 '''
     (MODEL_DIR / "MODEL_CARD.md").write_text(model_card, encoding="utf-8")
     print("Models and deployment documentation written.")
+
 
 if __name__ == "__main__":
     main()

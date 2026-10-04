@@ -1,3 +1,5 @@
+"""Prepare leakage-controlled baseline and selected-feature datasets."""
+
 import pandas as pd
 
 from config import (
@@ -6,7 +8,9 @@ from config import (
 )
 from utils import write_json
 
+
 def main():
+    """Create processed datasets and persist a data-contract summary."""
     df = pd.read_csv(RAW_DATA)
 
     # Explicit leakage controls.
@@ -34,6 +38,7 @@ def main():
     }
     write_json(contract, PROCESSED_DIR / "data_contract.json")
     print("Processed data and data contract written.")
+
 
 if __name__ == "__main__":
     main()

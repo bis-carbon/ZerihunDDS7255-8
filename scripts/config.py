@@ -1,3 +1,5 @@
+"""Central configuration for data paths, feature sets, and reproducibility settings."""
+
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
